@@ -1,3 +1,9 @@
+# Criados pelo desenvolvedor
+tests.py
+/modules/user_defaults.py
+rascunhos.txt
+/data/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
