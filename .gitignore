@@ -3,6 +3,8 @@ tests.py
 /modules/user_defaults.py
 rascunhos.txt
 /data/*
+materiais.txt
+venv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

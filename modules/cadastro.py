@@ -1,8 +1,13 @@
-import datetime, os, sys
+import datetime
+import os
+import sqlite3
+from contextlib import closing
+
 
 def clear():
     """Esta função limpa a tela do terminal."""
     os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def cadastrar():
     """Esta recebe os dados do animal e retorna uma tupla com eles.
@@ -15,16 +20,17 @@ def cadastrar():
         raca (str): Raça do animal.
         origem (str): Origem do animal.
     """
+
     # ID
     clear()
     while True:
-        id = input('ID: ').lower().strip()
-        if not id.isnumeric():
+        id_tag = input('ID: ').lower().strip()
+        if not id_tag.isnumeric():
             print('ID inválido!')
             print('Digite apenas números!\n')
         else:
             break
-    
+
     # Entrada
     entrada = input('Entrada: ')
     if entrada == '':
@@ -52,7 +58,7 @@ def cadastrar():
             elif genero == '5':
                 genero = 'equino'
             break
-    
+
     # Sexo
     clear()
     while True:
@@ -62,7 +68,7 @@ def cadastrar():
             print('Digite apenas M ou F!\n')
         else:
             break
-    
+
     # Categoria
     clear()
     if sexo == 'm':
@@ -72,7 +78,7 @@ def cadastrar():
             print('2 - Garrote')
             print('3 - Boi')
             categoria = input('>>> ')
-            
+
             if categoria not in ['1', '2', '3']:
                 print('Categoria inválida!')
                 print('Digite apenas 1, 2 ou 3!\n')
@@ -91,7 +97,7 @@ def cadastrar():
             print('2 - Novilha')
             print('3 - Vaca')
             categoria = input('>>> ')
-            
+
             if categoria not in ['1', '2', '3']:
                 print('Categoria inválida!')
                 print('Digite apenas 1, 2 ou 3!\n')
@@ -103,7 +109,7 @@ def cadastrar():
                 elif categoria == '3':
                     categoria = 'vaca'
                 break
-    
+
     # Raça
     clear()
     while True:
@@ -129,9 +135,34 @@ def cadastrar():
             elif raca == '5':
                 raca = 'gir leiteiro'
             break
-    
+
     # Origem
     clear()
     origem = input('\nOrigem: ')
-    
-    return id, entrada, genero, sexo, categoria, raca, origem
+
+    # Peso
+    clear()
+    while True:
+        peso = input('\nPeso: ')
+
+        if peso == '':
+            peso = 0.0
+        else:
+            try:
+                peso = float(peso)
+            except:
+                print('Peso inválido!')
+                print('Digite apenas números!\n')
+            else:
+                break
+
+    with sqlite3.connect('data/animais.db') as conexao:
+        with closing(conexao.cursor()) as cursor:
+            cursor.execute(f'''
+                                    INSERT INTO animais (id, entrada, genero, sexo, categoria, raca, origem, peso)
+                                    VALUES ('{id_tag}', '{entrada}', '{genero}', '{sexo}', '{categoria}', '{raca}', '{origem}', {peso})
+                               ''')
+            conexao.commit()
+
+    print('\nAnimal cadastrado com sucesso!')
+    input('Pressione ENTER para continuar...')
