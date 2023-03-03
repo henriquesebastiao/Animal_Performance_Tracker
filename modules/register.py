@@ -24,7 +24,7 @@ def register():
     # ID
     clear()
     while True:
-        identifier = input('ID: ').lower().strip()
+        identifier = input('ID: ').strip()
         if not identifier.isnumeric():
             print('ID inválido!')
             print('Digite apenas números!\n')
@@ -44,15 +44,16 @@ def register():
         print('\nGênero: ')
         print('1 - Bovino')
         print('2 - Suíno')
-        print('4 - Caprino')
-        print('5 - Equino')
+        print('3 - Caprino')
+        print('4 - Equino')
         genus = input('>>> ')
-        if genus not in ['1', '2', '4', '5']:
+        if genus not in ['1', '2', '3', '4']:
             print('Gênero inválido!')
-            print('Digite apenas 1, 2, 4 ou 5!\n')
+            print('Digite apenas 1, 2, 3 ou 4!\n')
         else:
             # Cadastro de bovinos
             if genus == '1':
+                genus = 'bovinos'
                 # Sexo
                 clear()
                 while True:
@@ -61,6 +62,10 @@ def register():
                         print('Sexo inválido!')
                         print('Digite apenas M ou F!\n')
                     else:
+                        if gender == 'm':
+                            gender = 'Macho'
+                        else:
+                            gender = 'Fêmea'
                         break
 
                 # Categoria
@@ -78,11 +83,11 @@ def register():
                             print('Digite apenas 1, 2 ou 3!\n')
                         else:
                             if category == '1':
-                                category = 'bezerro'
+                                category = 'Bezerro'
                             elif category == '2':
-                                category = 'garrote'
+                                category = 'Garrote'
                             elif category == '3':
-                                category = 'boi'
+                                category = 'Boi'
                             break
                 else:
                     while True:
@@ -97,11 +102,11 @@ def register():
                             print('Digite apenas 1, 2 ou 3!\n')
                         else:
                             if category == '1':
-                                category = 'bezerra'
+                                category = 'Bezerra'
                             elif category == '2':
-                                category = 'novilha'
+                                category = 'Novilha'
                             elif category == '3':
-                                category = 'vaca'
+                                category = 'Vaca'
                             break
 
                 # Raça
@@ -119,15 +124,15 @@ def register():
                         print('Digite apenas 1, 2, 3, 4 ou 5!\n')
                     else:
                         if race == '1':
-                            race = 'nelore'
+                            race = 'Nelore'
                         elif race == '2':
-                            race = 'girolando'
+                            race = 'Girolando'
                         elif race == '3':
-                            race = 'guzerá'
+                            race = 'Guzerá'
                         elif race == '4':
-                            race = 'senepol'
+                            race = 'Senepol'
                         elif race == '5':
-                            race = 'gir leiteiro'
+                            race = 'Gir Leiteiro'
                         break
 
                 # Origem
@@ -149,7 +154,7 @@ def register():
                     with closing(connection.cursor()) as cursor:
 
                         # Cria a tabela animais caso ela não exista
-                        cursor.execute('''CREATE TABLE IF NOT EXISTS bovinos (
+                        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {genus} (
                             id INTEGER PRIMARY KEY,
                             entrada TEXT,
                             sexo TEXT,
@@ -160,7 +165,7 @@ def register():
                         )''')
 
                         # Insere os dados no banco de dados
-                        cursor.execute('''INSERT INTO bovinos (
+                        cursor.execute(f'''INSERT INTO {genus} (
                             id, entrada, sexo, categoria, raca, origem, peso
                         ) VALUES (?, ?, ?, ?, ?, ?, ?)''', (
                             identifier, entry_date, gender, category, race, origin, peso
@@ -171,11 +176,242 @@ def register():
                         input('Pressione ENTER para continuar...')
                         break
             elif genus == '2':
-                # genus = 'suínos'
-                pass
+                genus = 'suinos'
+                # Sexo
+                clear()
+                while True:
+                    gender = input('Sexo: ').lower().strip()
+                    if gender not in 'mf':
+                        print('Sexo inválido!')
+                        print('Digite apenas M ou F!\n')
+                    else:
+                        if gender == 'm':
+                            gender = 'Macho'
+                        else:
+                            gender = 'Fêmea'
+                        break
+
+                # Raça
+                clear()
+                while True:
+                    print('\nRaça: ')
+                    print('1 - Landrace')
+                    print('2 - Duroc')
+                    print('3 - Hampshire')
+                    print('4 - Pietrain')
+                    print('5 - Large White')
+                    race = input('>>> ')
+                    if race not in ['1', '2', '3', '4', '5']:
+                        print('Raça inválida!')
+                        print('Digite apenas 1, 2, 3, 4 ou 5!\n')
+                    else:
+                        if race == '1':
+                            race = 'Landrace'
+                        elif race == '2':
+                            race = 'Duroc'
+                        elif race == '3':
+                            race = 'Hampshire'
+                        elif race == '4':
+                            race = 'Pietrain'
+                        elif race == '5':
+                            race = 'Large White'
+                        break
+
+                # Origem
+                clear()
+                origin = input('\nOrigem: ')
+
+                # Peso
+                clear()
+                while True:
+                    peso = input('\nPeso: ')
+                    try:
+                        peso = float(peso)
+                        break
+                    except ValueError:
+                        print('Peso inválido!')
+                        print('Digite apenas números!\n')
+
+                with sqlite3.connect('data/data_base.db') as connection:
+                    with closing(connection.cursor()) as cursor:
+                        # Cria a tabela animais caso ela não exista
+                        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {genus} (
+                            id INTEGER PRIMARY KEY,
+                            entrada TEXT,
+                            sexo TEXT,
+                            raca TEXT,
+                            origem TEXT,
+                            peso REAL
+                        )''')
+
+                        # Insere os dados no banco de dados
+                        cursor.execute(f'''INSERT INTO {genus} (
+                            id, entrada, sexo, categoria, raca, origem, peso
+                        ) VALUES (?, ?, ?, ?, ?, ?)''', (
+                            identifier, entry_date, gender, race, origin, peso
+                        ))
+                        connection.commit()
+
+                        print('\nAnimal cadastrado com sucesso!')
+                        input('Pressione ENTER para continuar...')
+                        break
+            elif genus == '3':
+                genus = 'caprinos'
+                # Sexo
+                clear()
+                while True:
+                    gender = input('Sexo: ').lower().strip()
+                    if gender not in 'mf':
+                        print('Sexo inválido!')
+                        print('Digite apenas M ou F!\n')
+                    else:
+                        if gender == 'm':
+                            gender = 'Macho'
+                        else:
+                            gender = 'Fêmea'
+                        break
+
+                # Raça
+                clear()
+                while True:
+                    print('\nRaça: ')
+                    print('1 - Boer')
+                    print('2 - Saanen')
+                    print('3 - Anglo Nubiana')
+                    print('4 - Pardo Suíço')
+                    print('5 - Moxotó')
+                    race = input('>>> ')
+                    if race not in ['1', '2', '3', '4', '5']:
+                        print('Raça inválida!')
+                        print('Digite apenas 1, 2, 3, 4 ou 5!\n')
+                    else:
+                        if race == '1':
+                            race = 'Boer'
+                        elif race == '2':
+                            race = 'Saanen'
+                        elif race == '3':
+                            race = 'Anglo Nubiana'
+                        elif race == '4':
+                            race = 'Pardo Suíço'
+                        elif race == '5':
+                            race = 'Moxotó'
+                        break
+
+                # Origem
+                clear()
+                origin = input('\nOrigem: ')
+
+                # Peso
+                clear()
+                while True:
+                    peso = input('\nPeso: ')
+                    try:
+                        peso = float(peso)
+                        break
+                    except ValueError:
+                        print('Peso inválido!')
+                        print('Digite apenas números!\n')
+
+                with sqlite3.connect('data/data_base.db') as connection:
+                    with closing(connection.cursor()) as cursor:
+                        # Cria a tabela animais caso ela não exista
+                        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {genus} (
+                            id INTEGER PRIMARY KEY,
+                            entrada TEXT,
+                            sexo TEXT,
+                            raca TEXT,
+                            origem TEXT,
+                            peso REAL
+                        )''')
+
+                        # Insere os dados no banco de dados
+                        cursor.execute(f'''INSERT INTO {genus} (
+                            id, entrada, sexo, categoria, raca, origem, peso
+                        ) VALUES (?, ?, ?, ?, ?, ?)''', (
+                            identifier, entry_date, gender, race, origin, peso
+                        ))
+                        connection.commit()
+
+                        print('\nAnimal cadastrado com sucesso!')
+                        input('Pressione ENTER para continuar...')
+                        break
             elif genus == '4':
-                # genus = 'caprinos'
-                pass
-            elif genus == '5':
-                # genus = 'equinos'
-                pass
+                genus = 'equinos'
+                # Sexo
+                clear()
+                while True:
+                    gender = input('Sexo: ').lower().strip()
+                    if gender not in 'mf':
+                        print('Sexo inválido!')
+                        print('Digite apenas M ou F!\n')
+                    else:
+                        if gender == 'm':
+                            gender = 'Macho'
+                        else:
+                            gender = 'Fêmea'
+                        break
+
+                # Raça
+                clear()
+                while True:
+                    print('\nRaça: ')
+                    print('1 - Mangalarga Marchador')
+                    print('2 - Quarto de Milha')
+                    print('3 - Crioulo')
+                    print('4 - Pampa')
+                    print('5 - Puro Sangue Inglês')
+                    race = input('>>> ')
+                    if race not in ['1', '2', '3', '4', '5']:
+                        print('Raça inválida!')
+                        print('Digite apenas 1, 2, 3, 4 ou 5!\n')
+                    else:
+                        if race == '1':
+                            race = 'Mangalarga Marchador'
+                        elif race == '2':
+                            race = 'Quarto de Milha'
+                        elif race == '3':
+                            race = 'Crioulo'
+                        elif race == '4':
+                            race = 'Pampa'
+                        elif race == '5':
+                            race = 'Puro Sangue Inglês'
+                        break
+
+                # Origem
+                clear()
+                origin = input('\nOrigem: ')
+
+                # Peso
+                clear()
+                while True:
+                    peso = input('\nPeso: ')
+                    try:
+                        peso = float(peso)
+                        break
+                    except ValueError:
+                        print('Peso inválido!')
+                        print('Digite apenas números!\n')
+
+                with sqlite3.connect('data/data_base.db') as connection:
+                    with closing(connection.cursor()) as cursor:
+                        # Cria a tabela animais caso ela não exista
+                        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {genus} (
+                            id INTEGER PRIMARY KEY,
+                            entrada TEXT,
+                            sexo TEXT,
+                            raca TEXT,
+                            origem TEXT,
+                            peso REAL
+                        )''')
+
+                        # Insere os dados no banco de dados
+                        cursor.execute(f'''INSERT INTO {genus} (
+                            id, entrada, sexo, categoria, raca, origem, peso
+                        ) VALUES (?, ?, ?, ?, ?, ?)''', (
+                            identifier, entry_date, gender, race, origin, peso
+                        ))
+                        connection.commit()
+
+                        print('\nAnimal cadastrado com sucesso!')
+                        input('Pressione ENTER para continuar...')
+                        break
