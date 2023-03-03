@@ -15,3 +15,49 @@ Com esses dados, é possível monitorar o desempenho dos animais ao longo do tem
 
 ### Recursos futuros:
 Análise de dados incluindo gráficos e relatórios personalizados, para ajudar os usuários a entender melhor o desempenho de seus animais.
+
+### Instalação:
+<details open><summary><strong>Ubuntu</strong></summary>
+
+#### Ubuntu:
+```bash
+sudo apt install python3.10 python3-pip
+pip3 install virtualenv
+git clone https://github.com/henriquesebastiao/Animal_Performance_Tracker.git
+cd Animal_Performance_Tracker
+virtualenv -p python3.10 venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+</details>
+<details><summary><strong>Fedora</strong></summary>
+
+```bash
+sudo dnf install python3.10 python3-pip
+pip3 install virtualenv
+git clone https://github.com/henriquesebastiao/Animal_Performance_Tracker.git
+cd Animal_Performance_Tracker
+virtualenv -p python3.10 venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+</details>
+<details><summary><strong>Arch</strong></summary>
+
+```bash
+sudo pacman -S python3.10 python3-pip
+pip3 install virtualenv
+git clone https://github.com/henriquesebastiao/Animal_Performance_Tracker.git
+cd Animal_Performance_Tracker
+virtualenv -p python3.10 venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+</details>
+
+Como usar:
+1. Dentro do diretório do projeto, execute o seguinte comando:
+```bash
+python3 main.py
+```
+2. Siga as instruções na tela.
