@@ -1,7 +1,7 @@
 import os
 import sys
 
-from modules import cadastro
+from modules import register, query
 
 
 def clear():
@@ -12,18 +12,18 @@ clear()
 
 print('''Animal Control - v0.1\n
 1 - Cadastrar animal
-2 - Alterar animal
-3 - Excluir animal
+2 - Consultar animal
+3 - Alterar animal
+4 - Excluir animal
 Ctrl+C - Sair\n''')
 
 try:
     opcao = input('>>> ')
 
     if opcao == '1':
-        cadastro.cadastrar()
+        register.register()
     elif opcao == '2':
-        pass
-
+        query.query()
     elif opcao == '3':
         pass
 
