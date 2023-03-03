@@ -55,7 +55,7 @@ pip install -r requirements.txt
 ```
 </details>
 
-Como usar:
+### Como usar:
 1. Dentro do diretório do projeto, execute o seguinte comando:
 ```bash
 python3 main.py
