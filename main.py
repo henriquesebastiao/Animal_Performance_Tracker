@@ -1,7 +1,7 @@
 import os
 import sys
 
-from modules import register, query
+from modules import register, query, update, delete
 
 
 def clear():
@@ -25,7 +25,9 @@ try:
     elif opcao == '2':
         query.query()
     elif opcao == '3':
-        pass
+        update.update()
+    elif opcao == '4':
+        delete.delete()
 
 except KeyboardInterrupt:
     print('\nSaindo...')
