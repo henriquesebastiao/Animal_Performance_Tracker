@@ -4,10 +4,14 @@ from contextlib import closing
 
 
 def clear():
+    """Limpa a tela do terminal"""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def update():
+    """Atualiza um animal no banco de dados"""
+
+    # Obtém a tabela do animal
     while True:
         clear()
         print('Informe o gênero do animal:')
@@ -42,6 +46,7 @@ def update():
             break
 
     while True:
+        # Obtém a característica a ser alterada
         clear()
         print('Informe a característica que deseja alterar:')
         print('1 - ID')
@@ -62,6 +67,7 @@ def update():
     elif caracteristica == '3':
         caracteristica = 'peso'
 
+    # Obtém o novo valor
     while True:
         clear()
         valor = input('Novo valor: ').strip()
@@ -71,6 +77,7 @@ def update():
         else:
             break
 
+    # Conexão com o banco de dados e atualização
     with closing(sqlite3.connect('data/data_base.db')) as connection:
         cursor = connection.cursor()
         cursor.execute(f'UPDATE {genus} SET {caracteristica} = {valor} WHERE id = {identifier}')
