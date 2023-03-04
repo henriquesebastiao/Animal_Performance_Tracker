@@ -5,6 +5,8 @@ rascunhos.txt
 /data/*
 materiais.txt
 venv/
+identifier.sqlite
+/tests_kivy
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
