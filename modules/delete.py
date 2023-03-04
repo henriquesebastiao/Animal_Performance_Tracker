@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import os
 import sqlite3
 
@@ -38,12 +40,11 @@ def delete():
     while True:
         clear()
         identifier = input('ID do animal: ').strip()
-        if not identifier.isnumeric():
-            print('Consulta inválida!')
-            print('Digite apenas números!\n')
-        else:
+        if identifier.isnumeric():
             break
 
+        print('Consulta inválida!')
+        print('Digite apenas números!\n')
     # Conexão com o banco de dados
     with sqlite3.connect('data/data_base.db') as connection:
         cursor = connection.cursor()
