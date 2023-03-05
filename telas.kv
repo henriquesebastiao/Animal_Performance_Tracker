@@ -32,7 +32,7 @@ ScreenManager:
             theme_text_color: 'Custom'
             text_color: 0, 0, 0
             font_size: '20sp'
-            # font_name: 'fonts/Poppins-SemiBold.ttf'
+            font_name: 'fonts/Roboto-Medium.ttf'
 
         MDLabel:
             text: 'Tracker'
@@ -41,30 +41,46 @@ ScreenManager:
             theme_text_color: 'Custom'
             text_color: 0, 0, 0
             font_size: '20sp'
-            # font_name: 'fonts/Poppins-SemiBold.ttf'
+            font_name: 'fonts/Roboto-Medium.ttf'
 
 # Tela de Dashboard 
 <DashboardScreen>:
     name: 'dashboard_screen'
     MDFloatLayout:
+
+        # Barra de navegação inferior
         MDBottomNavigation:
             painel_color: 8/255, 137/255, 90/255, 1
-            selected_color_background: "green"
+            selected_color_background: "#1a1c17" # Cor de fundo do item selecionado
             text_color_active: "lightgrey"
+            use_text: False # NÃO MOSTRAR TEXTO
 
             # Add a NavigationItem for each Navigation.
             MDBottomNavigationItem:
-                name: "dashboard"
-                text: "Dashboard"
-                icon: "view-dashboard"
+                name: "animais"
+                text: "Animais"
+                icon: "cow"
+                font_name: 'fonts/Roboto-Regular.ttf'
                 # badge_icon: "numeric-10" # NÚMERO DE NOTIFICAÇÕES
         
             MDBottomNavigationItem:
-                name: "animals"
-                text: "Animals"
-                icon: "cow"
+                name: "propriedades"
+                text: "Propriedades"
+                icon: "barn"
+                font_name: 'fonts/Roboto-Regular.ttf'
             
             MDBottomNavigationItem:
-                name: "reports"
-                text: "Reports"
-                icon: "chart-line"
+                name: "estatisticas"
+                text: "Estatísticas"
+                icon: "chart-box"
+                font_name: 'fonts/Roboto-Regular.ttf'
+            
+            MDBottomNavigationItem:
+                name: "Mais"
+                text: "Mais"
+                icon: "menu"
+                font_name: 'fonts/Roboto-Regular.ttf'
+        
+        MDFloatingActionButtonSpeedDial:
+            data: app.data
+            root_button_anim: True
