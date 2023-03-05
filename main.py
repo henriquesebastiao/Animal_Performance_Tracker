@@ -20,6 +20,8 @@ screen.add_widget(DashboardScreen(name="dashboard_screen"))
 
 class AnimalPerformanceTracker(MDApp):
     def build(self):
+        self.theme_cls.material_style = "M3"
+        self.theme_cls.theme_style = "Dark"
         return Builder.load_file("telas.kv")
 
 if __name__ == '__main__':

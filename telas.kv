@@ -32,7 +32,7 @@ ScreenManager:
             theme_text_color: 'Custom'
             text_color: 0, 0, 0
             font_size: '20sp'
-            font_name: 'fonts/Poppins-SemiBold.ttf'
+            # font_name: 'fonts/Poppins-SemiBold.ttf'
 
         MDLabel:
             text: 'Tracker'
@@ -41,22 +41,30 @@ ScreenManager:
             theme_text_color: 'Custom'
             text_color: 0, 0, 0
             font_size: '20sp'
-            font_name: 'fonts/Poppins-SemiBold.ttf'
+            # font_name: 'fonts/Poppins-SemiBold.ttf'
 
 # Tela de Dashboard 
 <DashboardScreen>:
     name: 'dashboard_screen'
     MDFloatLayout:
-        md_bg_color: 8/255, 137/255, 90/255, 1
-        MDLabel:
-            text: 'Dashboard'
-            halign: 'center'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
-            font_style: 'H4'
-            theme_text_color: 'Custom'
-            text_color: 0, 0, 0, 1
+        MDBottomNavigation:
+            painel_color: 8/255, 137/255, 90/255, 1
+            selected_color_background: "green"
+            text_color_active: "lightgrey"
 
-        MDRaisedButton:
-            text: 'Logout'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
-            on_release: app.logout()
+            # Add a NavigationItem for each Navigation.
+            MDBottomNavigationItem:
+                name: "dashboard"
+                text: "Dashboard"
+                icon: "view-dashboard"
+                # badge_icon: "numeric-10" # NÚMERO DE NOTIFICAÇÕES
+        
+            MDBottomNavigationItem:
+                name: "animals"
+                text: "Animals"
+                icon: "cow"
+            
+            MDBottomNavigationItem:
+                name: "reports"
+                text: "Reports"
+                icon: "chart-line"
