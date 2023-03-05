@@ -1,6 +1,7 @@
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
+from kivymd.uix.button import MDFloatingActionButton
 from kivy.lang import Builder
 
 colors = {
@@ -44,12 +45,6 @@ screen.add_widget(SplashScreen(name="splash_screen"))
 screen.add_widget(DashboardScreen(name="dashboard_screen"))
 
 class AnimalPerformanceTracker(MDApp):
-    
-    data = {
-		'Python': 'language-python',
-        'PHP': 'language-php',
-        'C++': 'language-cpp',
-	}
     
     def build(self):
         self.theme_cls.colors = colors
