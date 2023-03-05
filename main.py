@@ -12,11 +12,11 @@ screen = ScreenManager()
 class SplashScreen(Screen):
     pass
 
-class LoginScreen(Screen):
+class DashboardScreen(Screen):
     pass
 
 screen.add_widget(SplashScreen(name="splash_screen"))
-screen.add_widget(LoginScreen(name="login_screen"))
+screen.add_widget(DashboardScreen(name="dashboard_screen"))
 
 class AnimalPerformanceTracker(MDApp):
     def build(self):

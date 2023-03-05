@@ -1,7 +1,10 @@
+#:kivy 2.1.0
+
 ScreenManager:
     SplashScreen:
-    LoginScreen:
+    DashboardScreen:
 
+# Tela de Splash
 <SplashScreen>:
     name: 'splash_screen'
     MDFloatLayout:
@@ -10,56 +13,50 @@ ScreenManager:
             source: 'images/logo.png'
             size_hint: .50, .50
             size: 300, 300
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
             canvas.before:
                 Color:
                     rgba: 8/255, 137/255, 90/255, 1
+        
+        # Botão de avançar
         MDIconButton:
             icon: 'chevron-right'
-            user_font_size: '40sp'
+            user_font_size: '35sp'
             pos_hint: {'center_x': .5, 'center_y': .12}
-            on_press: app.root.current = 'login_screen'
+            on_press: app.root.current = 'dashboard_screen'
             
         MDLabel:
-            text: 'Animal Performance Tracker'
-            pos_hint: {'center_x': .5, 'center_y': 0.28}
-            halin: 'center'
+            text: 'Animal Performance'
+            pos_hint: {'center_x': .5, 'center_y': 0.30}
+            halign: 'center'
             theme_text_color: 'Custom'
             text_color: 0, 0, 0
             font_size: '20sp'
+            font_name: 'fonts/Poppins-SemiBold.ttf'
 
-<LoginScreen>:
-    name: 'login_screen'    
+        MDLabel:
+            text: 'Tracker'
+            pos_hint: {'center_x': .5, 'center_y': 0.265}
+            halign: 'center'
+            theme_text_color: 'Custom'
+            text_color: 0, 0, 0
+            font_size: '20sp'
+            font_name: 'fonts/Poppins-SemiBold.ttf'
+
+# Tela de Dashboard 
+<DashboardScreen>:
+    name: 'dashboard_screen'
     MDFloatLayout:
         md_bg_color: 8/255, 137/255, 90/255, 1
         MDLabel:
-            text: 'Login'
+            text: 'Dashboard'
             halign: 'center'
             pos_hint: {'center_x': 0.5, 'center_y': 0.8}
             font_style: 'H4'
             theme_text_color: 'Custom'
             text_color: 0, 0, 0, 1
-        MDTextField:
-            id: username
-            hint_text: 'Username'
-            helper_text: 'Enter your username'
-            helper_text_mode: 'on_focus'
-            icon_right: 'account'
-            icon_right_color: app.theme_cls.primary_color
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            size_hint_x: None
-            width: 300
-        MDTextField:
-            id: password
-            hint_text: 'Password'
-            helper_text: 'Enter your password'
-            helper_text_mode: 'on_focus'
-            icon_right: 'eye-off'
-            icon_right_color: app.theme_cls.primary_color
-            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
-            size_hint_x: None
-            width: 300
+
         MDRaisedButton:
-            text: 'Login'
+            text: 'Logout'
             pos_hint: {'center_x': 0.5, 'center_y': 0.3}
-            on_release: app.login()
+            on_release: app.logout()
