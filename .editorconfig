@@ -10,3 +10,9 @@ end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = false
 insert_final_newline = false
+
+[*.py]
+indent_size = 4
+
+[*.kv]
+indent_size = 4
