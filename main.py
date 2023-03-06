@@ -1,13 +1,14 @@
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
-from kivymd.uix.button import MDFloatingActionButton
+from kivymd.uix.floatlayout import MDFloatLayout
+from kivymd.uix.tab import MDTabsBase
 from kivy.lang import Builder
 
 colors = {
     "Teal": {
         "200": "#274a21",
-        "500": "#274a21",
+        "500": "#275a21",
         "700": "#274a21",
     },
     "Red": {
@@ -41,18 +42,31 @@ class SplashScreen(Screen):
 class DashboardScreen(Screen):
     pass
 
+class RegisterScreen(Screen):
+    pass
+
 screen.add_widget(SplashScreen(name="splash_screen"))
 screen.add_widget(DashboardScreen(name="dashboard_screen"))
+screen.add_widget(RegisterScreen(name="register_screen"))
+
+class Tab(MDFloatLayout, MDTabsBase):
+    pass
 
 class AnimalPerformanceTracker(MDApp):
-    
     def build(self):
         self.theme_cls.colors = colors
         self.theme_cls.primary_palette = "Green"
         self.theme_cls.accent_palette = "Green"
         self.theme_cls.material_style = "M3"
-        
         return Builder.load_file("telas.kv")
+
+    def on_tab_switch(
+        self, instance_tabs, instance_tab, instance_tab_label, tab_text
+    ):
+        if tab_text == "Dashboard":
+            screen.current = "dashboard_screen"
+        elif tab_text == "Register":
+            screen.current = "register_screen"
 
 if __name__ == '__main__':
     AnimalPerformanceTracker().run()

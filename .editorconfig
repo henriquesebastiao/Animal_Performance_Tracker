@@ -12,6 +12,6 @@ trim_trailing_whitespace = false
 insert_final_newline = false
 
 [{*.py, *.kv}]
-indent_style = tab
+indent_style = space
 indent_size = 4
 charset = utf-8

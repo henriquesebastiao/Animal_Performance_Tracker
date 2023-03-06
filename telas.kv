@@ -3,6 +3,7 @@
 ScreenManager:
     SplashScreen:
     DashboardScreen:
+    RegisterScreen:
 
 # Tela de Splash
 <SplashScreen>:
@@ -62,7 +63,7 @@ ScreenManager:
                 icon: "cow"
                 font_name: 'fonts/Roboto-Regular.ttf'
                 # badge_icon: "numeric-10" # NÚMERO DE NOTIFICAÇÕES
-        
+
             MDBottomNavigationItem:
                 name: "propriedades"
                 text: "Propriedades"
@@ -80,10 +81,26 @@ ScreenManager:
                 text: "Mais"
                 icon: "menu"
                 font_name: 'fonts/Roboto-Regular.ttf'
-        
+
         MDFloatingActionButton:
             md_bg_color: 8/255, 137/255, 90/255, 1
             id: box
             icon: "plus"
             type: "standard" # "standard", "large" or "small" # Tamanho do botão
-            pos_hint: {"center_x": .5, "center_y": .1}
+            pos_hint: {"center_x": .86, "center_y": .2}
+            on_press: app.root.current = 'register_screen'
+
+<RegisterScreen>:
+    name: 'register_screen'
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDTabs:
+            id: tabs
+            on_tab_switch: app.on_tab_switch(*args)
+
+            Tab:
+                title: "Animal"
+                MDLabel:
+                    titl: "Animal"
+                    halign: "center"
