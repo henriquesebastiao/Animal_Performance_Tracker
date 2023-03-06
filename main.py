@@ -30,6 +30,14 @@ colors = {
     },
 }
 
+__events__ = (
+    "on_tab_touch_down",
+    "on_tab_touch_move",
+    "on_tab_touch_up",
+    "on_tab_press",
+    "on_tab_release",
+)
+
 Window.size = (360, 640)
 
 global screen
@@ -39,14 +47,14 @@ screen = ScreenManager()
 class SplashScreen(Screen):
     pass
 
-class DashboardScreen(Screen):
+class MainScreen(Screen):
     pass
 
 class RegisterScreen(Screen):
     pass
 
 screen.add_widget(SplashScreen(name="splash_screen"))
-screen.add_widget(DashboardScreen(name="dashboard_screen"))
+screen.add_widget(MainScreen(name="main_screen"))
 screen.add_widget(RegisterScreen(name="register_screen"))
 
 class Tab(MDFloatLayout, MDTabsBase):

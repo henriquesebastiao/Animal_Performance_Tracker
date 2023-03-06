@@ -2,7 +2,7 @@
 
 ScreenManager:
     SplashScreen:
-    DashboardScreen:
+    MainScreen:
     RegisterScreen:
 
 # Tela de Splash
@@ -24,7 +24,7 @@ ScreenManager:
             icon: 'chevron-right'
             user_font_size: '35sp'
             pos_hint: {'center_x': .5, 'center_y': .12}
-            on_press: app.root.current = 'dashboard_screen'
+            on_press: app.root.current = 'nav_bar'
             
         MDLabel:
             text: 'Animal Performance'
@@ -44,43 +44,40 @@ ScreenManager:
             font_size: '20sp'
             font_name: 'fonts/Roboto-Medium.ttf'
 
-# Tela de Dashboard 
-<DashboardScreen>:
-    name: 'dashboard_screen'
+<MainScreen>: # Tela principal
+    name: 'nav_bar'
     MDFloatLayout:
-
-        # Barra de navegação inferior
-        MDBottomNavigation:
-            painel_color: 8/255, 137/255, 90/255, 1
-            selected_color_background: "#1a1c17" # Cor de fundo do item selecionado
-            text_color_active: "lightgrey"
-            use_text: False # NÃO MOSTRAR TEXTO
-
-            # Add a NavigationItem for each Navigation.
+        MDBottomNavigation: # Barra de navegação inferior
+            painel_color: 8/255, 137/255, 90/255, 1 # Cor do painel
+            selected_color_background: "#3c4b38" # Cor de fundo do item selecionado
+            text_color_active: "#daecd2" # Cor do ícone de navegação selecionado
+            text_color_normal: "#bdc3b9" # Cor dos ícones de navegação
+            use_text: True # NÃO MOSTRAR TEXTO
+            font_name: 'fonts/Product-Sans-Regular.ttf'
+            
             MDBottomNavigationItem:
                 name: "animais"
                 text: "Animais"
                 icon: "cow"
-                font_name: 'fonts/Roboto-Regular.ttf'
+                # on_tab_press: app.root.current = 'dashboard_screen'
                 # badge_icon: "numeric-10" # NÚMERO DE NOTIFICAÇÕES
-
+                MDLabel:
+                    text: "Animais"
             MDBottomNavigationItem:
                 name: "propriedades"
                 text: "Propriedades"
                 icon: "barn"
-                font_name: 'fonts/Roboto-Regular.ttf'
+                # on_tab_press: app.root.current = 'properties_screen'
             
             MDBottomNavigationItem:
                 name: "estatisticas"
                 text: "Estatísticas"
                 icon: "chart-box"
-                font_name: 'fonts/Roboto-Regular.ttf'
             
             MDBottomNavigationItem:
                 name: "Mais"
                 text: "Mais"
                 icon: "menu"
-                font_name: 'fonts/Roboto-Regular.ttf'
 
         MDFloatingActionButton:
             md_bg_color: 8/255, 137/255, 90/255, 1
