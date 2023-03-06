@@ -6,16 +6,6 @@ from kivymd.uix.tab import MDTabsBase
 from kivy.lang import Builder
 
 colors = {
-    "Teal": {
-        "200": "#274a21",
-        "500": "#275a21",
-        "700": "#274a21",
-    },
-    "Red": {
-        "200": "#C25554",
-        "500": "#C25554",
-        "700": "#C25554",
-    },
 	"Green": {
         "200": "#274a21",
         "500": "#274a21",
@@ -30,22 +20,10 @@ colors = {
     },
 }
 
-__events__ = (
-    "on_tab_touch_down",
-    "on_tab_touch_move",
-    "on_tab_touch_up",
-    "on_tab_press",
-    "on_tab_release",
-)
-
 Window.size = (360, 640)
 
 global screen
-
 screen = ScreenManager()
-
-class SplashScreen(Screen):
-    pass
 
 class MainScreen(Screen):
     pass
@@ -53,13 +31,14 @@ class MainScreen(Screen):
 class RegisterScreen(Screen):
     pass
 
-screen.add_widget(SplashScreen(name="splash_screen"))
+# Adicionando as telas ao gerenciador de telas
 screen.add_widget(MainScreen(name="main_screen"))
 screen.add_widget(RegisterScreen(name="register_screen"))
 
 class Tab(MDFloatLayout, MDTabsBase):
     pass
 
+# Classe principal
 class AnimalPerformanceTracker(MDApp):
     def build(self):
         self.theme_cls.colors = colors
@@ -68,13 +47,6 @@ class AnimalPerformanceTracker(MDApp):
         self.theme_cls.material_style = "M3"
         return Builder.load_file("telas.kv")
 
-    def on_tab_switch(
-        self, instance_tabs, instance_tab, instance_tab_label, tab_text
-    ):
-        if tab_text == "Dashboard":
-            screen.current = "dashboard_screen"
-        elif tab_text == "Register":
-            screen.current = "register_screen"
-
+# Iniciando o aplicativo
 if __name__ == '__main__':
     AnimalPerformanceTracker().run()

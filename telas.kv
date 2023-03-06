@@ -1,48 +1,8 @@
 #:kivy 2.1.0
 
 ScreenManager:
-    SplashScreen:
     MainScreen:
     RegisterScreen:
-
-# Tela de Splash
-<SplashScreen>:
-    name: 'splash_screen'
-    MDFloatLayout:
-        md_bg_color: 8/255, 137/255, 90/255, 1
-        Image:
-            source: 'images/logo.png'
-            size_hint: .50, .50
-            size: 300, 300
-            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
-            canvas.before:
-                Color:
-                    rgba: 8/255, 137/255, 90/255, 1
-        
-        # Botão de avançar
-        MDIconButton:
-            icon: 'chevron-right'
-            user_font_size: '35sp'
-            pos_hint: {'center_x': .5, 'center_y': .12}
-            on_press: app.root.current = 'nav_bar'
-            
-        MDLabel:
-            text: 'Animal Performance'
-            pos_hint: {'center_x': .5, 'center_y': 0.30}
-            halign: 'center'
-            theme_text_color: 'Custom'
-            text_color: 0, 0, 0
-            font_size: '20sp'
-            font_name: 'fonts/Roboto-Medium.ttf'
-
-        MDLabel:
-            text: 'Tracker'
-            pos_hint: {'center_x': .5, 'center_y': 0.265}
-            halign: 'center'
-            theme_text_color: 'Custom'
-            text_color: 0, 0, 0
-            font_size: '20sp'
-            font_name: 'fonts/Roboto-Medium.ttf'
 
 <MainScreen>: # Tela principal
     name: 'nav_bar'
@@ -78,26 +38,14 @@ ScreenManager:
                 name: "Mais"
                 text: "Mais"
                 icon: "menu"
-
+        
+        # Botão flutuante
         MDFloatingActionButton:
             md_bg_color: 8/255, 137/255, 90/255, 1
             id: box
             icon: "plus"
             type: "standard" # "standard", "large" or "small" # Tamanho do botão
             pos_hint: {"center_x": .86, "center_y": .2}
-            on_press: app.root.current = 'register_screen'
-
-<RegisterScreen>:
-    name: 'register_screen'
-    MDBoxLayout:
-        orientation: 'vertical'
-
-        MDTabs:
-            id: tabs
-            on_tab_switch: app.on_tab_switch(*args)
-
-            Tab:
-                title: "Animal"
-                MDLabel:
-                    titl: "Animal"
-                    halign: "center"
+            on_press:
+                app.root.transition.direction = 'left'
+                app.root.current = 'register_screen'
