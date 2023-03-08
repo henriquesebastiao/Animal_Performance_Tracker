@@ -47,6 +47,9 @@ class AnimalPerformanceTracker(MDApp):
         self.theme_cls.material_style = "M3"
         return Builder.load_file("telas.kv")
 
+=
 # Iniciando o aplicativo
 if __name__ == '__main__':
     AnimalPerformanceTracker().run()
+
+print(f"{}")
